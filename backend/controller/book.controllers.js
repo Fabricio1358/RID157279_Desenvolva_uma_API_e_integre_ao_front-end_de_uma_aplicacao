@@ -1,62 +1,62 @@
 import bookService from '../service/book.services.js'
 
-async function createBookController(request, resolve) { // POST /books
+async function createBookController(request, res) { // POST /books
      const newBook = request.body
 
      try {
           const createdBook = await bookService.createBookService(newBook)
-          resolve.status(201).send(createdBook)
+          res.status(201).send(createdBook)
      } catch (erro) {
-          resolve.status(400).send(erro.message)
+          res.status(400).send(erro.message)
      }
 }
 
-async function findAllBooksController(request, resolve) { // GET /books
+async function findAllBooksController(request, res) { // GET /books
      try {
           const books = await bookService.findAllBooksService()
-          resolve.send(books)
+          res.send(books)
      } catch (erro) {
-          resolve.status(404).send(erro.message)
+          res.status(404).send(erro.message)
      }
 }
 
-async function findBookByIdController(request, resolve) { // GET /books/:id
+async function findBookByIdController(request, res) { // GET /books/:id
      const bookId = request.params.id
 
      try {
           const book = await bookService.findBookByIdService(bookId)
-          return resolve.send({ book })
+          return res.send({ book })
      } catch (erro) {
-          return resolve.status(404).send(erro.message)
+          return res.status(404).send(erro.message)
      }
 }
 
-async function updateBookController(request, resolve) { // PUT /books/:id
+async function updateBookController(request, res) { // PUT /books/:id
      const bookId = request.params.id
      const updatedBook = request.body
 
      try {
           const response = await bookService.updateBookService(updatedBook, bookId)
-          return resolve.status(200).send({
+          return res.status(200).send({
                mensagem: 'Livro atualizado com sucesso',
                livro: response
           });
      } catch (erro) {
-          return resolve.status(400).send(erro.message)
+          return res.status(400).send(erro.message)
      }
 }
 
-async function deleteBookController(request, resolve) { // DELETE /books/:id
+async function deleteBookController(request, res) { // DELETE /books/:id
      const bookId = request.params.id
 
      try {
           const response = await bookService.deleteBookService(bookId)
-          return resolve.status(200).send({
+          return res.status(200).send({
                mensagem: 'Livro deletado com sucesso',
                livro: response
           });
      } catch (erro) {
-          return resolve.status(400).send(erro.message)
+          return res.status(400).send(erro.message)
      }
 }
 

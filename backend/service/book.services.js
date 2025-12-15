@@ -31,7 +31,7 @@ async function deleteBookService(bookId) {
      const book = await bookRepository.findBookByIdRepository(bookId)
      if (!book) throw new Error("Book not found")
      // const userId = request.userId // não necessário
-     const response = await bookRepository.deleteBookRepository(bookId) // Corrigido para chamar deleteBookRepository
+     const response = await bookRepository.deleteBookRepository(bookId)
      return response
 }
 
